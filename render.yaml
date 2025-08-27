@@ -1,15 +1,6 @@
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+- name: Deploy on Render
+  run: curl -X POST "https://api.render.com/v1/services/<your-service-id>/deploys" \
+       -H "Accept: application/json" \
+       -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+       -d ''
 
-      - name: Install curl
-        run: sudo apt-get update && sudo apt-get install -y curl
-
-      - name: Deploy to Render
-        run: |
-          curl -X POST "https://api.render.com/v1/services/<SERVICE_ID>/deploys" \
-          -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
-          -H "Accept: application/json"
